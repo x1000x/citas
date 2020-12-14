@@ -21,7 +21,7 @@ const eliminarCita = id =>{
  const titulo = citas.length === 0 ? 'No hay Citas'   : 'Administra tus citas'
   return (
     <Fragment>
-        <h1>Administrador de Pacientes</h1>
+        <h1>Administrador de Pacientes da fabian</h1>
 
         <div className = "container">
           <div className = " row">
