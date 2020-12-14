@@ -1,11 +1,27 @@
-import React, { Fragment, useState} from 'react';
+import React, { Fragment, useState, useEffect} from 'react';
 import Formulario from './components/Formulario';
 import Cita from './components/Cita';
 
 function App() {
 
+  //citas en local storage
+
+let citasIniciales = JSON.parse(localStorage.getItem('citas'));
+if (!citasIniciales){
+  citasIniciales=[];
+}
+
   //arreglo de citas (arreglo prioncipal)
-const [citas, guardarCitas] = useState([]);
+const [citas, guardarCitas] = useState(citasIniciales);
+
+//useEffect
+useEffect( () => {
+  if (citasIniciales){
+    localStorage.setItem('citas', JSON.stringify(citas));
+  } else{
+    localStorage.setItem('citas', JSON.stringify([]) );
+  }
+}, [citas] );
 
 // funcion citas actuales mas nuevas
 const crearCita = cita =>{
@@ -13,7 +29,6 @@ guardarCitas([...citas, cita])
 }
 
 //elimina citas
-
 const eliminarCita = id =>{
   const nuevasCitas = citas.filter(cita =>cita.id !== id)
   guardarCitas(nuevasCitas);
